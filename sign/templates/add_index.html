@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    !-- 加载bootstrap3应用、CSS、Javascript文件-->
+    {% load bootstrap3 %}   <!--为Django模板标签语言-->
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <meta charset="UTF-8">
+    <title>Add Index</title>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <!-- 将页面标题设置为发布会名称 -->
+                <a class="navbar-brand" href="#">新增读书计划{{ read.name }}</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav ">
+                    <!-- 设置页面导航栏，class=active表示当前菜单处于选中状态 -->
+                    <li><a href="/read_plan/">读书计划</a></li>
+                    <!-- href=/guest_manage/用于跳转到嘉宾管理页面 -->
+                    <li><a href="/guest_manage/">用户管理</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 新增读书计划功能 -->
+    <div class="page-header" style="padding-top: 80px;" align="center">
+        <div id="navbar" class="navbar-collapse collapse">
+            <!-- 签到表单通过POST请求将签到手机号提交到/sign_index_action/{{ event.id }}路径，{{ event.id }}会替换为发布会的id -->
+            <form class="navbar-form" method="post" action="/add_index_action/">
+                <div class="form-group">
+                    <table style="border-collapse:separate; border-spacing:10px;">
+                        <tr><td>工号：<input name="wd_num" type="text" placeholder="输入工号" class="form-control"></td><tr>
+                        <tr><td>姓名：<input name="name" type="text" placeholder="输入姓名" class="form-control"></td></tr>
+                        <tr><td>组名：<input name="group_name" type="text" placeholder="输入组名" class="form-control"></td></tr>
+                        <tr><td>书名：<input name="book_name" type="text" placeholder="输入书名" class="form-control"></td></tr>
+                        <tr><td>目标：<input name="target" type="text" placeholder="输入目标" class="form-control"></td></tr>
+                    </table>
+                </div>
+                <div><button type="submit" class="btn btn-success">保存</button></div>
+
+            </form>
+        </div>
+    </div>
+</body>
+</html>

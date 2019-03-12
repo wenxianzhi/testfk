@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+</head>
+<body>
+<table align="center">
+    <tr>
+        <td  align="center"><h1>登录</h1></td>
+    </tr>
+    <tr>
+        <td>
+            <form method="post" action="/login_action/">
+                <div>账号：<input name="username" type="text" placeholder="username"><br></div>
+                <div>密码：<input name="password" type="password" placeholder="password"><br></div>
+                <div>{{error}}<br></div>
+                <div align="center"><button id="btn" type="submit">登录</button></div>
+                {% csrf_token %}
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

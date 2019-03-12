@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    !-- 加载bootstrap3应用、CSS、Javascript文件-->
+    {% load bootstrap3 %}   <!--为Django模板标签语言-->
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <meta charset="UTF-8">
+    <title>Update Page</title>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <!-- 将页面标题设置为发布会名称 -->
+                <a class="navbar-brand" href="#">编辑读书计划</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav ">
+                    <!-- 设置页面导航栏，class=active表示当前菜单处于选中状态 -->
+                    <li><a href="/read_plan/">读书计划</a></li>
+                    <!-- href=/guest_manage/用于跳转到嘉宾管理页面 -->
+                    <li><a href="/guest_manage/">用户管理</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--读书列表-->
+    <!-- style属性中padding-top用于设置元素的上内边距，如果不设置该属性，读书列表可能会被导航栏遮挡 -->
+    <div class="row" style="padding-top:40px;">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>id</th><th>工号</th><th>姓名</th><th>组名</th><th>书名</th>
+                        <th>目标</th><th>是否完成</th><th>是否支付</th><th>创建时间</th><th>提交</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 通过Django模板语言，使用for循环，循环打印读书计划的id、name等字段，注意for循环语句需要有对应的endfor来表示语句的结束 -->
+                    {#% for read in reads %#}
+                    <form method="post" action="/update_index_action/{{ reads.id }}/">
+                        <tr>
+                                <td>{{ reads.id }}</td>
+                                <td>{{ reads.wd_num }}</td>
+                                <td>{{ reads.name }}</td>
+                                <td>{{ reads.group_name }}</td>
+                                <td>{{ reads.book_name }}</td>
+                                <td>{{ reads.target }}</td>
+                            <!--编辑功能-->
+                            <td>
+                                <!-- 编辑表单通过POST请求将编辑的数据提交到/update_index_action/{{ read.id }}路径，{{ read.id }}会替换为读书计划的id -->
+                                <select name="operation">
+                                    <option value="已完成">已完成</option>
+                                    <option value="未完成">未完成</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="pay_type">
+                                    <option value="已支付">已支付</option>
+                                    <option value="未支付">未支付</option>
+                                </select>
+                            </td>
+                            <td>{{ reads.create_time }}</td>
+                            <td>
+                                <button type="submit" class="btn btn-success">保存</button>
+                            </td>
+                        </tr>
+                    </form>
+                    {#% endfor %#}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
