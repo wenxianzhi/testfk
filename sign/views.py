@@ -75,7 +75,7 @@ def search_name(request):
     except EmptyPage:
         counts = paginator.page(paginator.num_pages)
     #将匹配到的读书会列表注意这里是列表不是，返回给客户端
-    #这里最重要，为了实现分页器功能，我们增加了一个返回值，即search_realname，也就是指定过滤的用户名称，并将这个值和readplans一起传递给guest_manage.html
+    #这里最重要，为了实现分页器功能，增加了一个返回值，即search_realname，也就是指定过滤的用户名称，并将这个值和readplans一起传递给guest_manage.html
     return render(request,'read_plan.html', {"user":username,"readplans":counts, "search_name":search_name})
 #用户管理列表
 @login_required
@@ -83,7 +83,7 @@ def guest_manage(request):
     username = request.session.get('user','')
     guest_list = Guest.objects.all()## 通过Guest.objects.all获取全部用户对象
     #增加分页器
-    paginator = Paginator(guest_list,2)# 把查询出来的所有用户列表guest_list放到Paginator类中，划分每页显示2条数据
+    paginator = Paginator(guest_list,4)# 把查询出来的所有用户列表guest_list放到Paginator类中，划分每页显示2条数据
     page = request.GET.get('page')  #通过GET请求得到当前要显示第几页的数据
     try:
         contacts = paginator.page(page) #获取第page页的数据

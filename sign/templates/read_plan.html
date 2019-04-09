@@ -23,7 +23,7 @@
                 <ul class="nav navbar-nav ">
                     <!-- 设置页面导航栏，class=active表示当前菜单处于选中状态 -->
                     <li class="active"><a href="#">读书计划</a></li>
-                    <!-- href=/guest_manage/用于跳转到嘉宾管理页面 -->
+                    <!-- href=/guest_manage/用于跳转到用户管理页面 -->
                     <li ><a href="/guest_manage/">用户管理</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -105,7 +105,7 @@
                         第 {{ readplans.number}} 页,共  {{ readplans.paginator.num_pages }} 页.
                     </span>
                     {% if readplans.has_next %}
-                        <!-- 同样这里也是增加了返回值name为搜索的用户名，只有这两个约束条件同时满足才能保证分页是针对嘉宾搜索结果的 -->
+                        <!-- 同样这里也是增加了返回值name为搜索的用户名，只有这两个约束条件同时满足才能保证分页是针对用户搜索结果的 -->
                         <a href="?page={{ readplans.next_page_number }}&name={{ search_name }}">下一页</a>
                     {% endif %}
                  <!-- 如果search_name为False，则代表并没有使用用户搜索功能，那么下面就正常展示嘉宾列表的搜索页和分页器 -->
